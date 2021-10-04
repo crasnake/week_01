@@ -10,51 +10,114 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Exercises
 
 1.  Explain coercion rules. Create an example that demonstrates the fixed order of the coercion rules.
+#You can force one type to be another and a specific pattern to perform.
+logicals -> integers -> doubles -> character
 
 ```{r}
-
+team1_numbers <- c(5, 10, 15, 20)
+team2_numbers <- c(2, 4, 6, 8)
 ```
+```{r}
+typeof(team1_numbers)
 
+is.double(team1_numbers)
+is.integer(team1_numbers)
+is.numeric(team1_numbers)
+```
+```{r}
+team1_numbers <- as.integer(team1_numbers)
+
+is.double(team1_numbers)
+is.integer(team1_numbers)
+is.numeric(team1_numbers)
+```
 2.  The following code will generate a warning. Explain why.
-
+#the as.integer should be an is.integer because the as.integer is forcing it to become an integer when it is logicals. the is.integer states what it actually is.
 ```{r}
 as.integer(c("one", "two", "three"))
 ```
+```{r}
+is.integer(c("one", "two", "three"))
+```
+
 
 3.  Create a vector of a sequence of integers starting at 2, ending at 100, and increasing by 2. Assign the vector to an object called `evens`. Coerce the vector to be of type `integer`. Confirm that the vector is of type `integer`.
 
 ```{r}
-
+seq(2, 100, by=2)
 ```
-
+```{r}
+evens <- seq(2, 100, by=2)
+```
+```{r}
+evens
+```
+```{r}
+as.integer(evens)
+```
+```{r}
+is.integer(evens)
+```
 4.  Create a vector of random numbers with a length equal to your vector in exercise 3. Use a seed with a value of 730 before creating your vector. Assign the vector to an object called `randoms`. Confirm the type of the vector.
 
 ```{r}
-
+set.seed(730)
+runif(50, 2, 100)
 ```
 
+```{r}
+randoms <- runif(50, 2, 100)
+```
+```{r}
+typeof(randoms)
+```
 5.  Create a vector demonstrating which values in exercise 3 are greater than `0.75`. Assign the vector to an object called `logicals`. Confirm the type of the vector.
 
 ```{r}
-
+runif(evens) >0.75
 ```
 
+```{r}
+logicals <- runif(evens) >0.75
+```
+```{r}
+typeof(logicals)
+```
 6.  Create a data frame including the three vectors created in exercises 3 through 5. Assign it to an object following best practices for naming.
 
 ```{r}
-
+data.frame(randoms, evens, randoms_evens = 1:50)
+```
+```{r}
+all_teams_numbers <- data.frame(randoms, evens, randoms_evens = 1:50)
+```
+```{r}
+all_teams_numbers
 ```
 
 7.  Create a new object which is the sum of `evens` and `randoms` all divided by 3. Demonstrate how to calculate basic summary statistics for this new object (mean, median, minimum, maximum, standard deviation, variance).
 
 ```{r}
-
+(evens + randoms)/3
 ```
-
+```{r}
+all_evens_randoms <- (evens + randoms)/3
+```
+```{r}
+all_evens_randoms
+```
+```{r}
+mean(all_evens_randoms)
+median(all_evens_randoms)
+min(all_evens_randoms)
+max(all_evens_randoms)
+sd(all_evens_randoms)
+var(all_evens_randoms)
+```
 8.  We discussed the idea that R is a "vectorized" language. Explain this concept. Why is it important?
-
+      #long list of numbers and characters are all vectors. all help standardize the structure of the data such as atomic vectors(logical, numeric, character).
 9.  Run the `sessionInfo` function in a chunk.
 
 ```{r}
-
+sessionInfo
 ```
